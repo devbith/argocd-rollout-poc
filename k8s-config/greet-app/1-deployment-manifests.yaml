@@ -1,0 +1,59 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Rollout
+metadata:
+  name: my-greet-app
+  namespace: localdevelopment
+  labels:
+    app: my-greet-app
+spec:
+  replicas: 4
+  selector:
+    matchLabels:
+      app: my-greet-app
+  template:
+    metadata:
+      labels:
+        app: my-greet-app
+    spec:
+      containers:
+        - name: greet-app
+          resources: {}
+          image: dockerbishalthapa/greet-app@sha256:0792d4228391a48011915ce8784bdd93c2274678d4da89a1b024d27b3a9e4b20
+          env:
+            - name: appVersion
+              value: v7
+          ports:
+            - name: m-pod-metrics
+              containerPort: 8080
+  strategy:
+    canary:
+      maxSurge: "75%"
+      maxUnavailable: 2
+      analysis:
+        templates:
+          - templateName: greet-app-success
+        args:
+          - name: appVersion
+            value: v7
+      steps:
+        - setWeight: 25
+        - pause: {duration: 3m}
+
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: my-greet-app-service
+  namespace: localdevelopment
+  labels:
+    app: my-greet-app-service
+spec:
+  type: LoadBalancer
+  selector:
+    app: my-greet-app
+  ports:
+    - name: https
+      port: 7001
+      targetPort: 8080

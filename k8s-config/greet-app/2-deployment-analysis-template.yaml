@@ -1,0 +1,22 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: AnalysisTemplate
+metadata:
+  name: greet-app-success
+  namespace: localdevelopment
+spec:
+  args:
+    - name: appVersion
+  metrics:
+    - name: greet-app-success
+      interval: 30s  # log analysis will be performed each interval
+      count: 5
+      failureLimit: 3
+      inconclusiveLimit: 3
+      successCondition: result[0] > 10
+      failureCondition: len(result) != 0 && result[0] == 0
+      provider:
+        prometheus:
+          address: http://10.102.52.192:9090  # Prometheus Cluster IP
+          query: |
+           sum(greeting_total{app_version=~"{{args.appVersion}}"})

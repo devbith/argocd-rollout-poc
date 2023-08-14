@@ -1,0 +1,18 @@
+---
+apiVersion: monitoring.coreos.com/v1
+kind: PodMonitor
+metadata:
+  name: my-greet-app-pod-monitor
+  namespace: localdevelopment
+  labels:
+    prometheus: main
+spec:
+  namespaceSelector:
+    matchNames:
+      - localdevelopment
+  selector:
+    matchLabels:
+      app: my-greet-app
+  podMetricsEndpoints:
+    - port: m-pod-metrics
+      path: "/actuator/prometheus"
