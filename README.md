@@ -8,11 +8,11 @@ The primary purpose of this repository is to try Argo Rollouts for deploying and
 ### k8s-config
 The k8s-config folder contains Kubernetes configurations for various components used in the deployment process. 
 
-###  Setup
+###  Setup First
 1. Clone this repository to your local machine.
 2. Navigate to `k8s-config` directory and follow the `README.md`  
 
-### Experiment
+### Experiment Second
 1. `kubectl get service -n localdevelopment`  
 
 Sample output:
