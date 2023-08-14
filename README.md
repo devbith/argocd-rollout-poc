@@ -12,9 +12,6 @@ The k8s-config folder contains Kubernetes configurations for various components 
 1. Clone this repository to your local machine.
 2. Navigate to `k8s-config` directory and follow the `README.md`  
 
-   NOTE: All the k8s configuration was tested on <b>Minikube version: `v1.31.1`</b> 
-
-
 ### Experiment
 1. `kubectl get service -n localdevelopment`  
 
