@@ -3,6 +3,8 @@
 This repository contains a sample Spring Boot application named greet-test-app along with Kubernetes configurations in the k8s-config folder. 
 The primary purpose of this repository is to try Argo Rollouts for deploying and managing applications.
 
+## Give it a spin on local Minikube Kubernetes playground or take the ultimate challenge and try it on production Kubernetes! 🚀😎
+
 ### k8s-config
 The k8s-config folder contains Kubernetes configurations for various components used in the deployment process. 
 
