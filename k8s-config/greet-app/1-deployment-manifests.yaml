@@ -22,7 +22,7 @@ spec:
           image: dockerbishalthapa/greet-app@sha256:0792d4228391a48011915ce8784bdd93c2274678d4da89a1b024d27b3a9e4b20
           env:
             - name: appVersion
-              value: v8
+              value: v9
           ports:
             - name: m-pod-metrics
               containerPort: 8080
@@ -35,7 +35,7 @@ spec:
           - templateName: greet-app-success
         args:
           - name: appVersion
-            value: v8
+            value: v9
       steps:
         - setWeight: 25
         - pause: {duration: 3m}
