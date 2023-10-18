@@ -30,6 +30,9 @@ spec:
         - name: greet-app-int-sidecar
           image: dockerbishalthapa/int-sidecar@sha256:40d86f7aac80e1925363b0c0259dab009c512f52905b0ae421a08fccdcf4e8a2
           imagePullPolicy: Always
+          securityContext:
+          runAsUser: 1000
+          runAsGroup: 1337
   strategy:
     canary:
       maxSurge: 4
@@ -40,10 +43,6 @@ spec:
       #   args:
       #     - name: appVersion
       #       value: v9
-      steps:
-        - setWeight: 50
-        - pause: {duration: 1m}
-
 
 ---
 apiVersion: v1
