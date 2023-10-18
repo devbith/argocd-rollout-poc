@@ -32,17 +32,17 @@ spec:
           imagePullPolicy: Always
   strategy:
     canary:
-      maxSurge: "75%"
-      maxUnavailable: 2
-      analysis:
-        templates:
-          - templateName: greet-app-success
-        args:
-          - name: appVersion
-            value: v9
+      maxSurge: 4
+      maxUnavailable: 1
+      # analysis:
+      #   templates:
+      #     - templateName: greet-app-success
+      #   args:
+      #     - name: appVersion
+      #       value: v9
       steps:
-        - setWeight: 25
-        - pause: {duration: 3m}
+        - setWeight: 50
+        - pause: {duration: 1m}
 
 
 ---
