@@ -26,6 +26,10 @@ spec:
           ports:
             - name: m-pod-metrics
               containerPort: 8080
+      initContainers:
+        - name: greet-app-int-sidecar
+          image: dockerbishalthapa/int-sidecar@sha256:40d86f7aac80e1925363b0c0259dab009c512f52905b0ae421a08fccdcf4e8a2
+          imagePullPolicy: Always
   strategy:
     canary:
       maxSurge: "75%"
