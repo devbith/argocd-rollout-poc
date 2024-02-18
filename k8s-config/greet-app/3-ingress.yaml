@@ -1,0 +1,19 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: geetapp-ingress
+  namespace: localdevelopment
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /$1
+spec:
+  rules:
+  - host: greetapp.com
+    http:
+      paths:
+      - pathType: Prefix 
+        path: /
+        backend:
+         service:
+           name: greetapp
+           port:
+             number: 7001
