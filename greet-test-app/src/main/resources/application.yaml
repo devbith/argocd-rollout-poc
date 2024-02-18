@@ -3,3 +3,7 @@ management:
     web:
       exposure:
         include: health, prometheus
+
+app-detail:
+  name: "Greet-Test-App"
+  version: 2

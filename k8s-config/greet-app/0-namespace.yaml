@@ -4,5 +4,4 @@ kind: Namespace
 metadata:
   name: localdevelopment
   labels:
-    monitoring: prometheus
     istio-injection: enabled

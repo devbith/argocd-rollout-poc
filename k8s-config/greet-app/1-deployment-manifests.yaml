@@ -1,61 +1,49 @@
----
 apiVersion: argoproj.io/v1alpha1
 kind: Rollout
 metadata:
-  name: my-greet-app
+  name: greetapp-rollout
   namespace: localdevelopment
   labels:
-    app: my-greet-app
+    app: greetapp-rollout
 spec:
-  replicas: 4
+  revisionHistoryLimit: 2
+  replicas: 2
   selector:
     matchLabels:
-      app: my-greet-app
+      app: greetapp-rollout
   template:
     metadata:
       labels:
-        app: my-greet-app
+        app: greetapp-rollout
     spec:
       containers:
         - name: greet-app
+          imagePullPolicy: Never 
           resources: {}
-          image: dockerbishalthapa/greet-app@sha256:aeb328d4811575671f16549ca20a1d3cefe356c941569abfb85fc339349d2a7b
+          image: greet:v2
           env:
             - name: appVersion
               value: v9
           ports:
             - name: m-pod-metrics
               containerPort: 8080
-      initContainers:
-        - name: greet-app-int-sidecar
-          image: dockerbishalthapa/int-sidecar@sha256:40d86f7aac80e1925363b0c0259dab009c512f52905b0ae421a08fccdcf4e8a2
-          imagePullPolicy: Always
-          securityContext:
-          runAsUser: 1000
-          runAsGroup: 1337
   strategy:
     canary:
-      maxSurge: 4
+      maxSurge: 2
       maxUnavailable: 1
-      # analysis:
-      #   templates:
-      #     - templateName: greet-app-success
-      #   args:
-      #     - name: appVersion
-      #       value: v9
 
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: my-greet-app-service
+  name: greetapp
   namespace: localdevelopment
   labels:
-    app: my-greet-app-service
+    app: greetapp
 spec:
-  type: LoadBalancer
+  type: ClusterIP
   selector:
-    app: my-greet-app
+    app: greetapp-rollout
   ports:
     - name: https
       port: 7001
