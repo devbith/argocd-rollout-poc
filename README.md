@@ -11,7 +11,11 @@ The primary purpose of this repository is to try Argo Rollouts for deploying and
 ## Build docker image directly inside minikube
 ```
 eval $(minikube docker-env)
+
+minikube image ls --format table
 ```
+
+## Instal istio
 
 ### k8s-config
 The k8s-config folder contains Kubernetes configurations for various components used in the deployment process. 
