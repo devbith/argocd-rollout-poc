@@ -5,6 +5,14 @@ The primary purpose of this repository is to try Argo Rollouts for deploying and
 
 ## Give it a spin on local Minikube Kubernetes playground or take the ultimate challenge and try it on production Kubernetes! 🚀😎
 
+## Install ArgoRollout Command
+(https://argoproj.github.io/argo-rollouts/installation)
+
+## Build docker image directly inside minikube
+```
+eval $(minikube docker-env)
+```
+
 ### k8s-config
 The k8s-config folder contains Kubernetes configurations for various components used in the deployment process. 
 
