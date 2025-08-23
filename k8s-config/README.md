@@ -38,6 +38,13 @@
 - `kubectl apply -f argo-rollout/0-namespace.yaml`
 - `kubectl apply -f argo-rollout/1-install.yaml -n argo-rollouts`
 
+### Configuration to connect ArgoCd to git repository 
+```
+argocd repo add git@github.com:devbith/argocd-rollout-poc.git --ssh-private-key-path ~/.ssh/id_ed25519
+```
+
+
+
 ### Install greet-app 
 - `kubectl apply -f greet-app`
 - `kubectl argo rollouts get rollout my-greet-app --watch -n localdevelopment`
