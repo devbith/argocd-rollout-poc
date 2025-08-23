@@ -53,8 +53,21 @@ argocd repo add git@github.com:devbith/argocd-rollout-poc.git --ssh-private-key-
 
 
 ### Install greet-app 
-- `kubectl apply -f greet-app`
+- `kubectl apply -f namespace/localdevelopment/greet-app`
 - `kubectl argo rollouts get rollout my-greet-app --watch -n localdevelopment`
+ 
+ Install greet-app istio gateway
+ - `kubectl apply -f namespace/istio-system/greet-gateway.yaml
+
+ Make some Test: 
+ ```
+ curl -v -H "Host: greet.com" http://10.103.58.183/greet/1
+```
+Here, host 10.103.58.183 could be different, use the blow command to find the external ip of istio-ingressgateway
+```
+ kubectl get svc istio-ingressgateway -n istio-system
+```
+
 
 ### Expose the prometheus as NodePort 
 
