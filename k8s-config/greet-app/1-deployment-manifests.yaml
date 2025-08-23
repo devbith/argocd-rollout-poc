@@ -46,5 +46,5 @@ spec:
     app: greetapp-rollout
   ports:
     - name: https
-      port: 7001
+      port: 80
       targetPort: 8080

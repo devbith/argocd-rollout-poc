@@ -1,0 +1,16 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: Gateway
+metadata:
+  name: greet-gw
+  namespace: istio-system
+spec:
+  selector:
+    istio: ingressgateway   # links to the LoadBalancer pods
+  servers:
+    - port:
+        number: 80
+        name: http
+        protocol: HTTP
+      hosts:
+        - greet.com
+

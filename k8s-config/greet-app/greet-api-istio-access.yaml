@@ -1,0 +1,22 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: greet-api-virtual-service
+  namespace: localdevelopment
+spec:
+  hosts:
+    - greet.com
+  gateways:
+    - istio-system/greet-gw   # <--- points to the gateway you just defined
+    - mesh
+  http:
+    - name: default
+      match:
+        - uri:
+            prefix: /
+      route:
+        - destination:
+            host: greetapp.localdevelopment.svc.cluster.local
+            port:
+              number: 80
+
