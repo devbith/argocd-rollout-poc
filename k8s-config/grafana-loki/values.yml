@@ -7,6 +7,8 @@ loki:
   enabled: true
   isDefault: true
   url: http://{{(include "loki.serviceName" .)}}:{{ .Values.loki.service.port }}
+  limits_config:
+    volume_enabled: true
   readinessProbe:
     httpGet:
       path: /ready
@@ -110,3 +112,6 @@ proxy:
   https_proxy: ""
   no_proxy: ""
 
+
+plugins:
+  - grafana-logs-drilldown-panel

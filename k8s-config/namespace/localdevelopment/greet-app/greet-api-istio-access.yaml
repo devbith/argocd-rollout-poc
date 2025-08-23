@@ -16,7 +16,12 @@ spec:
             prefix: /
       route:
         - destination:
-            host: greetapp.localdevelopment.svc.cluster.local
             port:
               number: 80
-
+            host: greetapp.localdevelopment.svc.cluster.local
+          weight: 100
+        - destination:
+            port:
+              number: 80
+            host: greetapp-preview.localdevelopment.svc.cluster.local
+          weight: 0
