@@ -28,22 +28,28 @@
 
     `kubectl patch svc argocd-server -n argocd -p '{"spec": {"type": "LoadBalancer"}}'`
 
-    `kubectl port-forward svc/argocd-server -n argocd 8080:443` 
+    `kubectl port-forward svc/argocd-server -n argocd 8001:443` 
 
-- Command to reterieve argocd password:
+## Install argocd 
+Check here:
 > https://argo-cd.readthedocs.io/en/stable/cli_installation/
+
+- Login to via argocd command line
+```
+argopass=$(kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d)
+argocd login localhost:8001 --insecure --username=admin --password=$argopass
+```
+
+```
+argocd repo add git@github.com:devbith/argocd-rollout-poc.git --ssh-private-key-path ~/.ssh/id_ed25519_devbith
+```
  
+- Command to reterieve argocd password:
   `kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d`
 
 #### Install argo-rollout
 - `kubectl apply -f argo-rollout/0-namespace.yaml`
 - `kubectl apply -f argo-rollout/1-install.yaml -n argo-rollouts`
-
-### Configuration to connect ArgoCd to git repository 
-```
-argocd repo add git@github.com:devbith/argocd-rollout-poc.git --ssh-private-key-path ~/.ssh/id_ed25519
-```
-
 
 
 ### Install greet-app 
