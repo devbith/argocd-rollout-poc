@@ -1,5 +1,10 @@
 ## Install granfana loki with helm
 
+### Install helm
+
+> https://helm.sh/docs/intro/install/
+
+
 ```
 helm install --values values.yml loki grafana/loki-stack -n loki-stack --set grafana.enabled=true --create-namespace
 ```
