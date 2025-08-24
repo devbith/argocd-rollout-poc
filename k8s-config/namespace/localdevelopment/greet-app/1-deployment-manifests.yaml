@@ -29,6 +29,16 @@ spec:
               containerPort: 8080
   strategy:
     canary:
-      maxSurge: 2
-      maxUnavailable: 1
-
+      steps:
+        - setWeight: 2
+        - pause: {}
+        - setWeight: 15
+        - pause: {}
+        - setWeight: 50
+        - pause: {}
+      trafficRouting:
+        istio:
+          virtualServices:
+            - name: greet-api-virtual-service
+              routes:
+                - default
